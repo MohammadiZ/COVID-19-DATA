@@ -1,5 +1,5 @@
 # Overview
-This collection of COVID-19 datasets and other datasets have been drawn from public sources. I provid a clean version for some of the files. The goal of this project is to archive COVID-19 datasets as much as possible in a central location, to make it easier for future researchers to study. 
+This collection of COVID-19 datasets and other datasets have been drawn from public sources. I provid the clean versions for some of the files. The goal of this project is to archive COVID-19 and the related datasets as much as possible in a central location, to make it easier for future researchers who studies the transmission of SARS-COV-2 in Canada. 
 
 :hourglass_flowing_sand: This repository is a work in progress.
 
