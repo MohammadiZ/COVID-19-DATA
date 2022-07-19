@@ -9,13 +9,13 @@ The following datasets are currently being archived:
 > 
 > :file_folder: Demographic Info folder includes demographic information of Canadian Provinces and regional health authorities. 
 > 
-> :file_folder: Commuting flow from POR to POW folder includes commuting Flow from Geography of Residence to Geography of Work at the level of Census Divisions. The data was downloaded from [statcan](https://www150.statcan.gc.ca/n1/en/catalogue/98-400-X2016391)[^1]. Here I provide the commute flow between health regions in Ontario and Newfoundland and Labrador.
+> :file_folder: Commuting flow from POR to POW folder includes commuting Flow from Geography of Residence to Geography of Work at the level of Census Divisions. The data was downloaded from [statcan](https://www150.statcan.gc.ca/n1/en/catalogue/98-400-X2016391)[[1]](#1). Here I provide the commute flow between health regions in Ontario and Newfoundland and Labrador.
 > 
 > :file_folder: COVID-19 Intervention folder includes data 
 
 
 ### Sources:
 The following public resources are used for collecting data
-- [^1] [Statistics Canada, Commuting flow from geography of residence to geography of work - Census divisions: Sex (3) for the employed labour force aged 15 years and
+- <a id="1">[1]</a> [Statistics Canada, Commuting flow from geography of residence to geography of work - Census divisions: Sex (3) for the employed labour force aged 15 years and
 over having a usual place of work, in private households, 2016 Census - 25% sample data](https://www150.statcan.gc.ca/n1/en/catalogue/98-400-X2016391)
 - [^2]
