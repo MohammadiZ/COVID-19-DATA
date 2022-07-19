@@ -11,7 +11,7 @@ The following datasets are currently being archived:
 - :file_folder: `Commuting flow from POR to POW` folder includes commuting Flow from Geography of Residence to Geography of Work at the level of Census Divisions. The data was downloaded from [statcan](https://www150.statcan.gc.ca/n1/en/catalogue/98-400-X2016391)[[5]](#5). Here, I provide the commute flow between health regions in Ontario and Newfoundland and Labrador.
 - :file_folder: `COVID-19 Intervention` folder includes the intervention timeline data in Canada that is provided by the Canadian Institute for Health Information (CIHI) [[6]](#6) Oxford stringency index [[7]](#7) and the Bank of Canada COVID‑19 stringency index [[8]](#8).
 - :file_folder: `Geographic_distance_CA_cities.csv` file represents kilometers distanace between canadian cities (with population greater than about 40,000) \[[9]](#9).
-- :file_folder: `2020_CA_Region_Mobility_Report.csv` and `2021_CA_Region_Mobility_Report` files are the Google Mobility reports in each geographic regions of Canada in 2020 and 2021 [[10]](#10).
+- :file_folder: `2020_CA_Region_Mobility_Report.csv` and `2021_CA_Region_Mobility_Report.csv` files are the Google Mobility reports in each geographic regions of Canada in 2020 and 2021 [[10]](#10).
 
 ### Sources:
 The following public resources are used for collecting data:
