@@ -6,7 +6,7 @@ This collection of COVID-19 datasets and other datasets have been drawn from pub
 
 ### Datasets:
 The following datasets are currently being archived:
-- :file_folder: `COVID-19 Data` folder includes confirmed COVID-19 cases/deaths and all acquisition data for Covid-19 at the province and health regions level for Ontario and Newfoundland and Labrador  [[1]](#1), [[2]](#2).
+- :file_folder: `COVID-19 Data` folder includes confirmed COVID-19 cases/deaths and all acquisition data for Covid-19 at the province and health regions level for Ontario [[1]](#1) and Newfoundland and Labrador [[2]](#2).
 - :file_folder: `Demographic Info` folder includes demographic information of Canadian Provinces and regional health authorities [[3]](#3), [[4]](#4). See [[4]](#4) for more details about Saskatchewan health regions.
 - :file_folder: `Commuting flow from POR to POW` folder includes commuting Flow from Geography of Residence to Geography of Work at the level of Census Divisions. The data was downloaded from [statcan](https://www150.statcan.gc.ca/n1/en/catalogue/98-400-X2016391)[[5]](#5). Here, I provide the commute flow between health regions in Ontario and Newfoundland and Labrador.
 - :file_folder: `COVID-19 Intervention` folder includes the intervention timeline data in Canada that is provided by the Canadian Institute for Health Information (CIHI) [[6]](#6) Oxford stringency index [[7]](#7) and the Bank of Canada COVID‑19 stringency index [[8]](#8).
