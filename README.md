@@ -26,5 +26,3 @@ The following public resources are used for collecting data:
 <a id="8">[8]</a> [The Bank of Canada COVID‑19 stringency index: measuring policy response across provinces](https://www.bankofcanada.ca/2021/02/staff-analytical-note-2021-1/) \
 <a id="9">[9]</a> [R package for geographical maps](https://cran.r-project.org/web/packages/maps/index.html) \
 <a id="10">[10]</a> [COVID-19 Community Mobility Reports](https://www.google.com/covid19/mobility/)
-<a id="8">[8]</a>
-<a id="8">[8]</a>
