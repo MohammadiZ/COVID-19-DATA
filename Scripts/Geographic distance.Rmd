@@ -1,0 +1,108 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+### Geographic distance
+
+
+### load packages
+```{r}
+library(maps) ## Draw geographical maps.
+library(sf) ## Simple Feature: import, export and manipulate vector data
+library(tidyverse) ##Collection of packages (visualization, manipulation): ggplot2, dplyr, purrr, etc
+library(units) ## Support for measurement units in R vectors, matrices and arrays: propagation, conversion, derivation
+library(rnaturalearth) ## Hold and facilitate interaction with Natural Earth map data
+library(rnaturalearthdata)
+```
+### set of world cities with coordinates
+```{r}
+head(world.cities) # from the maps package(world cities of population greater than about 40,000)
+```
+### convert the points into an sf object with CRS WSG84
+```{r}
+cities <- st_as_sf(world.cities, coords = c("long", "lat"), crs = 4326)
+cities
+```
+### filter the Canadian cities
+```{r}
+CA_cities <- filter(cities, country.etc == "Canada")
+
+# create a new label combining name and country
+CA_cities <- mutate(CA_cities, city_country = str_c(name, " (", country.etc, ")"))
+CA_cities
+```
+### Example: Calculate the distance Saint John to Toronto, Calgary and Vancouver
+```{r}
+dist_st.Jh <- st_distance(slice(CA_cities, 663), 
+                              slice(CA_cities, c(831, 106, 852)))
+dist_st.Jh# distance in meters
+```
+### change from m to km
+```{r}
+set_units(dist_st.Jh, "km")
+
+as.vector(dist_st.Jh) ## shows as a vector
+```
+### calculate all distance
+```{r}
+distance_all <- st_distance(CA_cities)
+# matrix
+dim(distance_all)
+# change m to km
+distance_all_km <- set_units(distance_all, km)
+# replace the distance of 0 m with NA
+#distance_all_km[distance_all_km == set_units(0, km)] <- NA
+dim(distance_all_km)
+
+```
+### Export the distance matrix as a csv file
+```{r}
+Dis_df <- as.data.frame(distance_all_km)
+name_cities <- data.frame(CA_cities$name)
+new <- Dis_df
+colnames(new) <- name_cities[,1] 
+distance_all_km_withname <- cbind(name_cities, new)
+
+write.table(distance_all_km_withname, file = "Geographic_distance_CA_cities.csv",  quote = TRUE, sep = ", ", row.names = FALSE, col.names = TRUE, qmethod = "double")
+```
+
+### Check the csv file is correct
+```{r}
+dist_test<- st_distance(slice(CA_cities, 1), 
+                              slice(CA_cities, c(2,5)))
+dist_test# distance in meters
+set_units(dist_test, "km")
+
+```
+
+
+### get the index (position) of the city and the distance(nearest city)
+```{r}
+pos <- apply(distance_all_km, 1, which.min)
+dist <- apply(distance_all_km, 1, min, na.rm = TRUE)
+# add the distance and get the name of the city
+CA_cities <- mutate(CA_cities, nearest_city =  city_country[pos], 
+                             geometry_nearest = geometry[pos],
+                             distance_city = dist)
+```
+###  map
+```{r}
+world <- ne_countries(scale = "medium", returnclass = "sf", country = 'canada')
+# map
+ggplot(world) +
+   geom_sf(fill = "lightblue", colour = "white") +
+   geom_sf(data = CA_cities, 
+           aes(size = distance_city),
+           alpha = 0.7,
+           fill = "#bd0026",
+           shape = 21,
+           show.legend = 'point') +
+   coord_sf(crs = "+proj=robin +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs") +
+  labs(size = "Distance (km)", title = "Distance to the next city(Canada)") +
+  theme_void()
+
+
+```
+
+
+
