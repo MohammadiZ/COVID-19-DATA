@@ -1,29 +1,33 @@
 ---
-title: "R Notebook"
+title: "Geographic distance between Canadian Cities"
+link-citations: true
 output: html_notebook
+abstract: This script is related to "Geographic_distance_CA_cities.csv" file in the Data folder that represents the distance between Canadian cities. I have used `Maps` R-package to extract the distances. I should tahnk you Dominic Roye for publishing an informative blog in [R-bloggers](https://www.r-bloggers.com/2019/10/geographic-distance/) and his advise. 
 ---
-### Geographic distance
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 
-### load packages
+##### Load packages
 ```{r}
-library(maps) ## Draw geographical maps.
-library(sf) ## Simple Feature: import, export and manipulate vector data
-library(tidyverse) ##Collection of packages (visualization, manipulation): ggplot2, dplyr, purrr, etc
-library(units) ## Support for measurement units in R vectors, matrices and arrays: propagation, conversion, derivation
-library(rnaturalearth) ## Hold and facilitate interaction with Natural Earth map data
+library(maps) 
+library(sf) 
+library(tidyverse) 
+library(units) 
+library(rnaturalearth) 
 library(rnaturalearthdata)
 ```
-### set of world cities with coordinates
+##### From the maps package(Call world cities of population greater than about 40,000)
 ```{r}
-head(world.cities) # from the maps package(world cities of population greater than about 40,000)
+head(world.cities) 
 ```
-### convert the points into an sf object with CRS WSG84
+##### Convert the points into an sf object with CRS WSG84
 ```{r}
 cities <- st_as_sf(world.cities, coords = c("long", "lat"), crs = 4326)
 cities
 ```
-### filter the Canadian cities
+##### Filter the Canadian cities
 ```{r}
 CA_cities <- filter(cities, country.etc == "Canada")
 
@@ -31,19 +35,19 @@ CA_cities <- filter(cities, country.etc == "Canada")
 CA_cities <- mutate(CA_cities, city_country = str_c(name, " (", country.etc, ")"))
 CA_cities
 ```
-### Example: Calculate the distance Saint John to Toronto, Calgary and Vancouver
+##### Example: Calculate the distance Saint John to Toronto, Calgary and Vancouver
 ```{r}
 dist_st.Jh <- st_distance(slice(CA_cities, 663), 
                               slice(CA_cities, c(831, 106, 852)))
-dist_st.Jh# distance in meters
+dist_st.Jh# distances are in meters
 ```
-### change from m to km
+##### Change distance from meter to kilometer
 ```{r}
 set_units(dist_st.Jh, "km")
 
 as.vector(dist_st.Jh) ## shows as a vector
 ```
-### calculate all distance
+##### Calculate all distance between Candian cities
 ```{r}
 distance_all <- st_distance(CA_cities)
 # matrix
@@ -55,7 +59,7 @@ distance_all_km <- set_units(distance_all, km)
 dim(distance_all_km)
 
 ```
-### Export the distance matrix as a csv file
+##### Export the distance matrix as a csv file
 ```{r}
 Dis_df <- as.data.frame(distance_all_km)
 name_cities <- data.frame(CA_cities$name)
@@ -66,7 +70,7 @@ distance_all_km_withname <- cbind(name_cities, new)
 write.table(distance_all_km_withname, file = "Geographic_distance_CA_cities.csv",  quote = TRUE, sep = ", ", row.names = FALSE, col.names = TRUE, qmethod = "double")
 ```
 
-### Check the csv file is correct
+##### Check the csv file is correct
 ```{r}
 dist_test<- st_distance(slice(CA_cities, 1), 
                               slice(CA_cities, c(2,5)))
@@ -76,7 +80,7 @@ set_units(dist_test, "km")
 ```
 
 
-### get the index (position) of the city and the distance(nearest city)
+##### Get the index (position) of the city and the distance(nearest city)
 ```{r}
 pos <- apply(distance_all_km, 1, which.min)
 dist <- apply(distance_all_km, 1, min, na.rm = TRUE)
@@ -85,7 +89,7 @@ CA_cities <- mutate(CA_cities, nearest_city =  city_country[pos],
                              geometry_nearest = geometry[pos],
                              distance_city = dist)
 ```
-###  map
+##### Map
 ```{r}
 world <- ne_countries(scale = "medium", returnclass = "sf", country = 'canada')
 # map
@@ -103,6 +107,4 @@ ggplot(world) +
 
 
 ```
-
-
 
